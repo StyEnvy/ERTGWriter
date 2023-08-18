@@ -7,41 +7,41 @@ from controllers.main_menu_controller import MainMenuController
 
 def apply_dark_mode(app):
     # Dark Mode Theme
-    palette = QPalette()
-    palette.setColor(QPalette.Window, QColor(53, 53, 53))
-    palette.setColor(QPalette.WindowText, Qt.white)
-    palette.setColor(QPalette.Base, QColor(25, 25, 25))
-    palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
-    palette.setColor(QPalette.Text, Qt.white)
-    palette.setColor(QPalette.Button, QColor(53, 53, 53))
-    palette.setColor(QPalette.ButtonText, Qt.white)
-    app.setPalette(palette)
+    palette = QPalette() # Create a palette
+    palette.setColor(QPalette.Window, QColor(53, 53, 53)) # Set the window color
+    palette.setColor(QPalette.WindowText, Qt.white) # Set the window text color
+    palette.setColor(QPalette.Base, QColor(25, 25, 25)) # Set the base color
+    palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53)) # Set the alternate base color
+    palette.setColor(QPalette.Text, Qt.white) # Set the text color
+    palette.setColor(QPalette.Button, QColor(53, 53, 53)) # Set the button color
+    palette.setColor(QPalette.ButtonText, Qt.white) # Set the button text color
+    app.setPalette(palette) # Apply the palette to the application
 
 def center_on_screen(window):
     # Center the window on the primary screen
-    center_point = QDesktopWidget().availableGeometry().center()
-    frame_geometry = window.frameGeometry()
-    frame_geometry.moveCenter(center_point)
-    window.move(frame_geometry.topLeft())
+    center_point = QDesktopWidget().availableGeometry().center() # Get center point of primary screen
+    frame_geometry = window.frameGeometry() # Get frame geometry of window
+    frame_geometry.moveCenter(center_point) # Move frame geometry to center point
+    window.move(frame_geometry.topLeft()) # Move window to top left of frame geometry
 
 def main():
     # Set up logging
     # (Add logging configuration here if needed)
 
     try:
-        app = QApplication(sys.argv)
+        app = QApplication(sys.argv) # Create application
         apply_dark_mode(app) # Apply dark mode theme
-        controller = MainMenuController()
-        view = MainMenuView(controller)
+        controller = MainMenuController() # Create controller
+        view = MainMenuView(controller) # Create view
         view.resize(1280, 780) # Set default window size
         center_on_screen(view) # Center the window on the primary screen
-        controller.view = view
-        sys.exit(app.exec_())
-    except Exception as e:
+        controller.view = view # Assign view to controller
+        sys.exit(app.exec_()) # Run the application
+    except Exception as e: # pylint: disable=broad-except
         # Handle exceptions
         # (Log the exception here and provide user-friendly error messages if needed)
         print(f"An error occurred: {e}")
-        sys.exit(1)
+        sys.exit(1) # Exit with error code 1
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()
