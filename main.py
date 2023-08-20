@@ -40,19 +40,17 @@ def main():
     logging.info("Application started")
 
     try:
-        app = QApplication(sys.argv) # Create application
-        apply_dark_mode(app) # Apply dark mode theme
-        controller = MainMenuController() # Create controller
-        view = MainMenuView(controller) # Create view
-        view.resize(1280, 780) # Set default window size
-        center_on_screen(view) # Center the window on the primary screen
-        controller.view = view # Assign view to controller
-        sys.exit(app.exec_()) # Run the application
-    except Exception as e: # pylint: disable=broad-except
-        # Handle exceptions
-        # (Log the exception here and provide user-friendly error messages if needed)
+        app = QApplication(sys.argv)
+        apply_dark_mode(app)
+        controller = MainMenuController(None)  # Create controller first
+        view = MainMenuView(controller)  # Pass the controller to the view
+        controller.view = view  # Assign view to controller
+        view.resize(1280, 780)
+        center_on_screen(view)
+        sys.exit(app.exec_())
+    except Exception as e:
         print(f"An error occurred: {e}")
-        sys.exit(1) # Exit with error code 1
+        sys.exit(1)
 
 if __name__ == "__main__": 
     main()
