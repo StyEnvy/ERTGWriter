@@ -125,9 +125,11 @@ class InputStagePropertiesEditor(QWidget):
 
         self.setLayout(layout)
 
-    def add_choice(self):
+    def add_choice(self, choice_text: str, next_chapter_id: int):
         if len(self.choices_widgets) < 6:
             choice_widget = ChoiceWidget()
+            choice_widget.text_edit.setText(choice_text)
+            choice_widget.next_chapter_id_edit.setText(str(next_chapter_id))
             self.choices_widgets.append(choice_widget)
             self.layout().insertWidget(len(self.choices_widgets), choice_widget)
             if len(self.choices_widgets) == 6:

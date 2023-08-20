@@ -74,7 +74,16 @@ class WriterViewController:
                 stage_editor_panel.stage_type_selector.setCurrentIndex(1)
                 stage_editor_panel.input_properties_editor.next_stage_id_edit.setText(str(stage.next_stage_id))
                 stage_editor_panel.input_properties_editor.input_key_edit.setText(str(stage.input_key))
-                # Add other properties as needed
+                stage_editor_panel.input_properties_editor.special_case_edit.setText(str(stage.special_case))
+                stage_editor_panel.input_properties_editor.special_case_next_chapter_id_edit.setText(str(stage.special_case_next_chapter_id))
+
+                print("Stage ID:", stage.stage_id)  # Debug print
+                print("Stage Choices:", stage.choices)  # Debug print
+                print(f"Debug: Stage ID: {stage.stage_id}, Choices: {stage.choices}")  # Debug print
+
+                # Handling choices for input stage
+                for choice in stage.choices:
+                    stage_editor_panel.input_properties_editor.add_choice(choice.text, choice.next_chapter_id)
 
             # Add stage_editor_panel to the view
             self.view.stage_editor_container.addWidget(stage_editor_panel)
@@ -100,10 +109,12 @@ class WriterViewController:
                 input_key = properties['input_key']
                 special_case = properties.get('special_case')
                 special_case_next_chapter_id = properties.get('special_case_next_chapter_id')
+                # Updated code
                 choices_data = properties.get('choices', [])
                 choices = [Choice(choice['text'], choice['next_chapter_id']) for choice in choices_data]
-                stage = InputStage(stage_id, text, input_key, next_stage_id, special_case,
-                                   special_case_next_chapter_id, choices)
+                stage = InputStage(stage_id, text, input_key, choices, next_stage_id, special_case,
+                                   special_case_next_chapter_id)
+
             stages.append(stage)
         return Chapter(stages)
 
