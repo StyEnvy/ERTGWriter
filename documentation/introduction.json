@@ -1,0 +1,13 @@
+{
+    "title": "Introduction",
+    "sections": [
+        {
+            "title": "Overview",
+            "content": "Welcome to ERTG Writer, a proprietary tool specifically designed for writing chapters for Erainor RPG. This tool streamlines the creation and management of game chapters, providing an efficient and user-friendly interface."
+        },
+        {
+            "title": "Creating New Documentation JSONs",
+            "content": "Creating new documentation JSONs is a simple process. Here's how you can do it:<br><br><ol><li>Create a new JSON file inside the 'documentation' folder.</li><li>Name the file according to the topic, replacing spaces with underscores (e.g., 'new_topic.json').</li><li>Structure the JSON file with a 'title' and 'sections'. Each section should contain a 'title' and 'content'.</li><li>Save the file, and it will be accessible from the Table of Contents within the application.</li></ol><br>For example:<br><pre>{\"title\": \"New Topic\",\"sections\": [{\"title\": \"Subsection\",\"content\": \"Content goes here...\"}]}<pre>"
+        }
+    ]
+}

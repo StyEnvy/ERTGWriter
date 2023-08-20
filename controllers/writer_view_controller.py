@@ -1,5 +1,6 @@
 from views.about_dialog import AboutDialog  # Import the AboutDialog class
 from views.documentation_view import DocumentationView # Import the DocumentationView class
+from controllers.documentation_view_controller import DocumentationViewController # Import the DocumentationViewController class
 
 class WriterViewController:
     def __init__(self, view):
@@ -22,36 +23,14 @@ class WriterViewController:
         # Logic for exporting the chapter to a JSON file
         pass
 
-    def exit(self):
-        # Logic for exiting the application
-        pass
-
-    def undo(self):
-        # Logic for undoing the last action
-        pass
-
-    def redo(self):
-        # Logic for redoing the last undone action
-        pass
-
-    def copy(self):
-        # Logic for copying the selected content
-        pass
-
-    def paste(self):
-        # Logic for pasting the copied content
-        pass
-
-    def delete(self):
-        # Logic for deleting the selected content
-        pass
-
     def about(self):
         about_dialog = AboutDialog() # Create an instance of the AboutDialog class
         about_dialog.exec_() # Show the AboutDialog
 
     def documentation(self):
-        self.documentation_view = DocumentationView(self.view)  # Pass main window as parent
-        self.documentation_view.show()
+        self.documentation_controller = DocumentationViewController(view=None) # Create controller without view
+        self.documentation_view = DocumentationView(controller=self.documentation_controller, parent=self.view) # Create view with controller
+        self.documentation_controller.view = self.documentation_view # Assign view to controller
+        self.documentation_view.show() # Show the DocumentationView
 
     # Add more methods as needed...

@@ -1,3 +1,4 @@
+import logging
 import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QDesktopWidget
@@ -14,7 +15,7 @@ def apply_dark_mode(app):
     palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53)) # Set the alternate base color
     palette.setColor(QPalette.Text, Qt.white) # Set the text color
     palette.setColor(QPalette.Button, QColor(53, 53, 53)) # Set the button color
-    palette.setColor(QPalette.ButtonText, Qt.white) # Set the button text color
+    palette.setColor(QPalette.ButtonText, Qt.black) # Set the button text color
     app.setPalette(palette) # Apply the palette to the application
 
 def center_on_screen(window):
@@ -24,9 +25,19 @@ def center_on_screen(window):
     frame_geometry.moveCenter(center_point) # Move frame geometry to center point
     window.move(frame_geometry.topLeft()) # Move window to top left of frame geometry
 
+def configure_logging():
+    logging.basicConfig(
+        level=logging.INFO, # Set the logging level to INFO
+        format="%(asctime)s [%(levelname)s] %(message)s", # Set the format for log messages
+        handlers=[
+            logging.FileHandler("application.log"), # Log messages to a file
+            logging.StreamHandler() # Print log messages to console
+        ]
+    )
+
 def main():
-    # Set up logging
-    # (Add logging configuration here if needed)
+    configure_logging()
+    logging.info("Application started")
 
     try:
         app = QApplication(sys.argv) # Create application
