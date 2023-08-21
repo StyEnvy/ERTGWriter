@@ -38,8 +38,14 @@ for %%p in (%packages%) do (
     )
 )
 
-REM Start the main script
-python main.py
+REM Start the main script and log errors
+echo Running application...
+python main.py 2>error.log
+
+if errorlevel 1 (
+    echo An error occurred while running the application. Check error.log for details.
+    pause
+)
 
 echo If you encountered any issues while running this script, please ensure the following:
 echo 1. You have the latest version of Python and pip installed.
