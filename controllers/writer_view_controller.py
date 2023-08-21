@@ -10,6 +10,7 @@ class WriterViewController:
     def __init__(self, view, file_path=None):
         self.view = view
         self.current_chapter = None
+        self.current_file_path = file_path
         if file_path:
             self.parse_and_load_chapter(file_path)
 
@@ -41,10 +42,14 @@ class WriterViewController:
             self.current_chapter = None
             print("New chapter started")  # Debug print
 
+            # Clear current file path
+            self.current_file_path = None
+
     def open_chapter(self):
         options = QFileDialog.Options()
         file_path, _ = QFileDialog.getOpenFileName(self.view, "Open Chapter", "", "Chapter Files (*.json);;All Files (*)", options=options)
         if file_path:
+            self.current_file_path = file_path
             # Clear existing stages before loading the new chapter
             for _ in range(self.view.stage_editor_container.count()):
                 widget = self.view.stage_editor_container.itemAt(0).widget()
@@ -55,8 +60,36 @@ class WriterViewController:
             print(f"Chapter loaded from {file_path}")  # Debug print
 
     def save_chapter(self):
-        # Logic for saving the current chapter
-        pass
+        # Check if the current chapter has been saved before
+        if self.current_file_path:
+            self.save_to_file(self.current_file_path)
+        else:
+            self.save_chapter_as()
+
+    def save_to_file(self, file_path: str):
+        # Logic to save the current chapter to the specified file path
+        stages = []
+        for index in range(0, self.view.stage_editor_container.count(), 2): # Step by 2 to skip separators
+            stage_editor_panel = self.view.stage_editor_container.itemAt(index).widget()
+            # Build the stage data from the panel (you'll need to implement this method)
+            stage = stage_editor_panel.build_stage()
+            stages.append(stage)
+        chapter_data = {'stages': stages}
+        with open(file_path, 'w') as file:
+            json.dump(chapter_data, file, indent=4)
+        print(f"Chapter saved to {file_path}")  # Debug print
+
+    def save_chapter_as(self):
+        chapter_id = self.view.chapter_info_panel.chapter_id_edit.text().strip()
+        if chapter_id.isdigit():
+            default_name = f"chapter_{chapter_id}.json"
+            options = QFileDialog.Options()
+            file_path, _ = QFileDialog.getSaveFileName(self.view, "Save Chapter", default_name, "Chapter Files (*.json);;All Files (*)", options=options)
+            if file_path:
+                self.current_file_path = file_path
+                self.save_to_file(file_path)
+        else:
+            QMessageBox.warning(self.view, "Invalid Chapter ID", "Please enter a valid chapter ID before saving.")
 
     def export_json(self):
         # Logic for exporting the chapter to a JSON file
@@ -76,6 +109,7 @@ class WriterViewController:
         json_data = self.load_chapter_from_file(file_path)
         chapter = self.parse_chapter(json_data)
         self.current_chapter = chapter
+        self.current_file_path = file_path
         print(chapter)  # Print the loaded chapter to verify it's loaded correctly
         self.update_gui_with_chapter(chapter, file_path)  # Call method to update GUI with file_path
 

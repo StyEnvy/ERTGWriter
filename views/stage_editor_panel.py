@@ -45,6 +45,62 @@ class StageEditorPanel(QWidget):
 
         self.setLayout(layout)
 
+    def build_stage(self):
+        stage_id = int(self.stage_id_edit.text())
+        stage_text = self.stage_text_editor.toPlainText()
+        stage_type_index = self.stage_type_selector.currentIndex()
+
+        # Linear Stage
+        if stage_type_index == 0:
+            next_stage_id_text = self.linear_properties_editor.next_stage_id_edit.text().strip()
+            next_stage_id = int(next_stage_id_text) if next_stage_id_text.isdigit() else None
+            properties = {'type': 'linear'}
+            if next_stage_id is not None:
+                properties['next_stage_id'] = next_stage_id
+            stage_data = {
+                'id': stage_id,
+                'text': stage_text,
+                'properties': properties
+            }
+        # Input Stage
+        elif stage_type_index == 1:
+            next_stage_id_text = self.input_properties_editor.next_stage_id_edit.text().strip()
+            next_stage_id = int(next_stage_id_text) if next_stage_id_text.isdigit() else None
+            input_key = self.input_properties_editor.input_key_edit.text().strip()
+            special_case = self.input_properties_editor.special_case_edit.text().strip()
+            special_case_next_chapter_id_text = self.input_properties_editor.special_case_next_chapter_id_edit.text().strip()
+            special_case_next_chapter_id = int(special_case_next_chapter_id_text) if special_case_next_chapter_id_text.isdigit() else None
+
+            # Extract choices
+            choices = []
+            for choice_widget in self.input_properties_editor.choices_widgets:
+                choice_text = choice_widget.text_edit.text().strip()
+                next_chapter_id_text = choice_widget.next_chapter_id_edit.text().strip()
+                next_chapter_id = int(next_chapter_id_text) if next_chapter_id_text.isdigit() else None
+                if choice_text:  # Only add choices if the text is not empty
+                    choices.append({'text': choice_text, 'next_chapter_id': next_chapter_id})
+
+            # Construct properties dictionary with required fields
+            properties = {'type': 'input'}
+            if next_stage_id is not None:
+                properties['next_stage_id'] = next_stage_id
+            if input_key:
+                properties['input_key'] = input_key
+            if special_case:
+                properties['special_case'] = special_case
+            if special_case_next_chapter_id is not None:
+                properties['special_case_next_chapter_id'] = special_case_next_chapter_id
+            if choices:
+                properties['choices'] = choices
+
+            stage_data = {
+                'id': stage_id,
+                'text': stage_text,
+                'properties': properties
+            }
+
+        return stage_data
+
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QHBoxLayout, QSizePolicy
 
 class LinearStagePropertiesEditor(QWidget):
@@ -91,7 +147,7 @@ class InputStagePropertiesEditor(QWidget):
         choice_buttons_layout = QHBoxLayout()
         add_choice_button = QPushButton("Add")
         add_choice_button.setFixedWidth(80)
-        add_choice_button.clicked.connect(self.add_choice)
+        add_choice_button.clicked.connect(lambda: self.add_choice())
         remove_choice_button = QPushButton("Remove")
         remove_choice_button.setFixedWidth(80)
         remove_choice_button.clicked.connect(self.remove_choice)
@@ -125,11 +181,11 @@ class InputStagePropertiesEditor(QWidget):
 
         self.setLayout(layout)
 
-    def add_choice(self, choice_text: str, next_chapter_id: int):
+    def add_choice(self, choice_text: str = "", next_chapter_id: int = None):
         if len(self.choices_widgets) < 6:
             choice_widget = ChoiceWidget()
             choice_widget.text_edit.setText(choice_text)
-            choice_widget.next_chapter_id_edit.setText(str(next_chapter_id))
+            choice_widget.next_chapter_id_edit.setText(str(next_chapter_id) if next_chapter_id is not None else "")
             self.choices_widgets.append(choice_widget)
             self.layout().insertWidget(len(self.choices_widgets), choice_widget)
             if len(self.choices_widgets) == 6:
