@@ -8,6 +8,17 @@ class WriterView(QMainWindow):
         super().__init__()
         self.controller = controller
 
+        self.create_menu_bar()
+        self.create_main_layout(new_chapter)
+
+        # Window Title
+        self.setWindowTitle("ERTG - Chapter Writer")
+
+        # Set default window size
+        self.resize(1280, 780)
+        self.show()
+
+    def create_menu_bar(self):
         # Dark Mode Theme for Menu Bar
         palette = QPalette()
         palette.setColor(QPalette.Window, QColor(53, 53, 53))
@@ -24,13 +35,13 @@ class WriterView(QMainWindow):
         file_menu.addAction('New Chapter', self.controller.new_chapter)
         file_menu.addAction('Open Chapter', self.controller.open_chapter)
         file_menu.addAction('Save Chapter', self.controller.save_chapter)
-        file_menu.addAction('Export JSON', self.controller.export_json)
 
         # Help Menu
         help_menu = menu_bar.addMenu('Help')
         help_menu.addAction('About', self.controller.about)
         help_menu.addAction('Documentation', self.controller.documentation)
 
+    def create_main_layout(self, new_chapter):
         # Main Layout (Vertical)
         main_layout = QVBoxLayout()
 
@@ -64,13 +75,6 @@ class WriterView(QMainWindow):
         main_widget = QWidget()
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
-
-        # Window Title
-        self.setWindowTitle("ERTG - Chapter Writer")
-
-        # Set default window size
-        self.resize(1280, 780)
-        self.show()
 
     def add_stage(self):
         stage_editor_panel = StageEditorPanel()

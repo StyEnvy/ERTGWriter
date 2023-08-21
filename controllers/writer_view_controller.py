@@ -3,12 +3,14 @@ from views.about_dialog import AboutDialog
 from views.documentation_view import DocumentationView
 from controllers.documentation_view_controller import DocumentationViewController
 from views.stage_editor_panel import StageEditorPanel
+from controllers.file_operations import FileOperations
 from PyQt5.QtWidgets import QFrame, QMessageBox, QFileDialog
 import json
 
 class WriterViewController:
     def __init__(self, view, file_path=None):
         self.view = view
+        self.file_operations = FileOperations()
         self.current_chapter = None
         self.current_file_path = file_path
         if file_path:
@@ -91,10 +93,6 @@ class WriterViewController:
         else:
             QMessageBox.warning(self.view, "Invalid Chapter ID", "Please enter a valid chapter ID before saving.")
 
-    def export_json(self):
-        # Logic for exporting the chapter to a JSON file
-        pass
-
     def about(self):
         about_dialog = AboutDialog() # Create an instance of the AboutDialog class
         about_dialog.exec_() # Show the AboutDialog
@@ -106,12 +104,15 @@ class WriterViewController:
         self.documentation_view.show() # Show the DocumentationView
 
     def parse_and_load_chapter(self, file_path: str):
-        json_data = self.load_chapter_from_file(file_path)
-        chapter = self.parse_chapter(json_data)
+        json_data = self.file_operations.load_chapter_from_file(file_path)  # Use the method from FileOperations
+        chapter = self.file_operations.parse_chapter(json_data)  # Use the method from FileOperations
         self.current_chapter = chapter
         self.current_file_path = file_path
-        print(chapter)  # Print the loaded chapter to verify it's loaded correctly
-        self.update_gui_with_chapter(chapter, file_path)  # Call method to update GUI with file_path
+        print(chapter)
+        self.update_gui_with_chapter(chapter, file_path)
+
+    def save_to_file(self, file_path: str):
+        self.file_operations.save_to_file(self.view.stage_editor_container, file_path)  # Use the method from FileOperations
 
     def update_gui_with_chapter(self, chapter, file_path: str):
         chapter_id = file_path.split("_")[-1].split(".")[0]  # Extract chapter ID from file path
@@ -163,28 +164,6 @@ class WriterViewController:
             separator.setFixedHeight(2)  # Set a fixed height for the separator
             self.view.stage_editor_container.addWidget(separator)
 
-    def parse_chapter(self, json_data: dict) -> Chapter:
-        stages = []
-        for stage_data in json_data['stages']:
-            stage_id = stage_data['id']
-            text = stage_data['text']
-            properties = stage_data['properties']
-            stage_type = properties['type']
-            next_stage_id = properties.get('next_stage_id')
-            if stage_type == 'linear':
-                stage = LinearStage(stage_id, text, next_stage_id)
-            else:  # Input stage
-                input_key = properties.get('input_key')  # Get input_key if it exists, otherwise None
-                special_case = properties.get('special_case')
-                special_case_next_chapter_id = properties.get('special_case_next_chapter_id')
-                choices_data = properties.get('choices', [])
-                choices = [Choice(choice['text'], choice['next_chapter_id']) for choice in choices_data]
-                stage = InputStage(stage_id, text, input_key, choices, next_stage_id, special_case,
-                                   special_case_next_chapter_id)
 
-            stages.append(stage)
-        return Chapter(stages)
 
-    def load_chapter_from_file(self, file_path: str) -> dict:
-        with open(file_path, 'r') as file:
-            return json.load(file)
+
