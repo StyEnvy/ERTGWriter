@@ -3,11 +3,11 @@
     "sections": [
         {
             "title": "Overview",
-            "content": "Welcome to ERTG Writer, a proprietary tool specifically designed for writing chapters for Erainor RPG. This tool streamlines the creation and management of game chapters, providing an efficient and user-friendly interface."
+            "content": "Welcome to ERTG Writer, a proprietary tool created by Styanatos of Envy Games. This tool is specifically designed for creating and editing chapter files for Erainor RPG, a text-based game also made by Envy Games. ERTG Writer streamlines the creation and management of game chapters, providing an efficient and user-friendly interface."
         },
         {
-            "title": "Creating New Documentation JSONs",
-            "content": "Creating new documentation JSONs is a simple process. Here's how you can do it:<br><br><ol><li>Create a new JSON file inside the 'documentation' folder.</li><li>Name the file according to the topic, replacing spaces with underscores (e.g., 'new_topic.json').</li><li>Structure the JSON file with a 'title' and 'sections'. Each section should contain a 'title' and 'content'.</li><li>Save the file, and it will be accessible from the Table of Contents within the application.</li></ol><br>For example:<br><pre>{\"title\": \"New Topic\",\"sections\": [{\"title\": \"Subsection\",\"content\": \"Content goes here...\"}]}<pre>"
+            "title": "Creating New Documentation JSONs for ERTG Writer",
+            "content": "Creating new documentation JSONs is a simple process. Here's how you can do it:<br><br><ol><li>Create a new JSON file inside the 'documentation' folder.</li><li>Name the file according to the topic, replacing spaces with underscores (e.g., 'new_topic.json').</li><li>Structure the JSON file with a 'title' and 'sections'. Each section should contain a 'title' and 'content'.</li><li>Save the file, and it will be accessible from the Table of Contents within the application.</li></ol><br>For example:<br><pre>{\n    \"title\": \"New Topic\",\n    \"sections\": [\n        {\n            \"title\": \"Subsection\",\n            \"content\": \"Content goes here...\"\n        }\n    ]\n}</pre>"
         }
     ]
 }

@@ -1,0 +1,13 @@
+{
+    "title": "Chapter Creation",
+    "sections": [
+        {
+            "title": "Naming a Chapter File",
+            "content": "When creating a new chapter in ERTG Writer, you will enter the chapter number in the GUI. Upon saving, the system will automatically suggest the proper name following the pattern <b>chapter_#.json</b>, where # is the numerical chapter ID. For example, for Chapter 3, the file name would be <b>chapter_3.json</b>."
+        },
+        {
+            "title": "Chapter File Structure and Formatting",
+            "content": "A chapter file consists of an array called <b>stages</b>, where each stage is represented by a JSON object. The formatting is structured and readable, with each property placed on a new line. Here's an overview of the structure:<br><br><pre>{\n  \"stages\": [\n    {\n      \"id\": 1,\n      \"text\": \"Greetings, wanderer. Welcome to the realm of Erainor...\",\n      \"properties\": {\n        \"type\": \"linear\",\n        \"next_stage_id\": 2\n      }\n    },\n    ...\n  ]\n}</pre><br>This structure defines the chapter's narrative flow and contains properties for each stage, such as <b>id</b>, <b>text</b>, and <b>properties</b>. The <b>properties</b> object further specifies the stage's type, next_stage_id, and other attributes. The above formatting ensures that the JSON file is easily readable and maintainable."
+        }
+    ]
+}

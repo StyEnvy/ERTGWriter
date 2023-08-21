@@ -1,0 +1,21 @@
+{
+    "title": "Getting Started",
+    "sections": [
+        {
+            "title": "Overview",
+            "content": "ERTG Writer is designed to simplify the process of creating and managing chapters for Erainor RPG. This guide will introduce you to the main functionalities accessible from the main menu, File menu, and Help menu."
+        },
+        {
+            "title": "Main Menu",
+            "content": "The main menu provides two key options:<br><ul><li><b>Create New Chapter:</b> Start a fresh chapter writing project.</li><li><b>Open Chapter:</b> Open an existing chapter file for editing.</li></ul>"
+        },
+        {
+            "title": "File Menu",
+            "content": "The File menu offers the following options:<br><ul><li><b>New Chapter:</b> Start a new chapter, discarding any unsaved changes.</li><li><b>Open Chapter:</b> Open an existing chapter file for further editing.</li><li><b>Save Chapter:</b> Save the current chapter. If it's the first time saving a new chapter, this option will behave like 'Save As', allowing you to specify a file name and location. If you're working on an existing chapter, it will simply update the file with any new changes.</li></ul>"
+        },
+        {
+            "title": "Help Menu",
+            "content": "The Help menu consists of the following options:<br><ul><li><b>About:</b> Displays information about the application. Note that this is a GUI-blocking dialog, meaning you must close it to continue interacting with the application.</li><li><b>Documentation:</b> Opens the documentation view. This view uses a dock widget, which allows the Table of Contents to be placed in a separate, dockable panel. You can select topics from the Table of Contents to view their details.</li></ul>"
+        }
+    ]
+}
