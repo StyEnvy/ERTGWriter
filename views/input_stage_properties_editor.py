@@ -4,24 +4,24 @@ class InputStagePropertiesEditor(QWidget):
     def __init__(self):
         super().__init__()
 
-        layout = QVBoxLayout()
+        layout = QVBoxLayout() # Create a layout and set the spacing to 0
 
         # Choices Layout
-        self.choices_widgets = []
-        choices_label = QLabel("Add a new choice field:")
-        layout.addWidget(choices_label)
+        self.choices_widgets = [] # List to store the choice widgets
+        choices_label = QLabel("Add a new choice field:") # Create a label for the choices
+        layout.addWidget(choices_label) # Add the label to the main layout
 
         # Add/Remove Choice Buttons
-        choice_buttons_layout = QHBoxLayout()
-        add_choice_button = QPushButton("Add")
-        add_choice_button.setFixedWidth(80)
-        add_choice_button.clicked.connect(lambda: self.add_choice())
-        remove_choice_button = QPushButton("Remove")
-        remove_choice_button.setFixedWidth(80)
-        remove_choice_button.clicked.connect(self.remove_choice)
-        choice_buttons_layout.addWidget(add_choice_button)
-        choice_buttons_layout.addWidget(remove_choice_button)
-        layout.addLayout(choice_buttons_layout)
+        choice_buttons_layout = QHBoxLayout() # Create a choice buttons layout
+        add_choice_button = QPushButton("Add") # Create an add choice button
+        add_choice_button.setFixedWidth(80) # Set a fixed width
+        add_choice_button.clicked.connect(lambda: self.add_choice()) # Connect the add choice button to the add choice function
+        remove_choice_button = QPushButton("Remove") # Create a remove choice button
+        remove_choice_button.setFixedWidth(80) # Set a fixed width
+        remove_choice_button.clicked.connect(self.remove_choice) # Connect the remove choice button to the remove choice function
+        choice_buttons_layout.addWidget(add_choice_button) # Add the choice buttons to the choice buttons layout
+        choice_buttons_layout.addWidget(remove_choice_button) # Add the choice buttons to the choice buttons layout
+        layout.addLayout(choice_buttons_layout) # Add the choice buttons layout to the main layout
 
         # Input Key  (optional)
         self.input_key_edit = QLineEdit()
@@ -49,35 +49,35 @@ class InputStagePropertiesEditor(QWidget):
 
         self.setLayout(layout)
 
-    def add_choice(self, choice_text: str = "", next_chapter_id: int = None):
-        if len(self.choices_widgets) < 6:
-            choice_widget = ChoiceWidget()
-            choice_widget.text_edit.setText(choice_text)
-            choice_widget.next_chapter_id_edit.setText(str(next_chapter_id) if next_chapter_id is not None else "")
-            self.choices_widgets.append(choice_widget)
-            self.layout().insertWidget(len(self.choices_widgets), choice_widget)
-            if len(self.choices_widgets) == 6:
-                sender = self.sender()
-                sender.setDisabled(True)
+    def add_choice(self, choice_text: str = "", next_chapter_id: int = None): # Function to add a choice
+        if len(self.choices_widgets) < 6: # If there are less than 6 choices
+            choice_widget = ChoiceWidget() # Create a choice widget
+            choice_widget.text_edit.setText(choice_text) # Set the choice text
+            choice_widget.next_chapter_id_edit.setText(str(next_chapter_id) if next_chapter_id is not None else "") # Set the next chapter ID
+            self.choices_widgets.append(choice_widget) # Add the choice widget to the list
+            self.layout().insertWidget(len(self.choices_widgets), choice_widget) # Add the choice widget to the layout
+            if len(self.choices_widgets) == 6: # If there are 6 choices
+                sender = self.sender() # Get the sender
+                sender.setDisabled(True) # Disable the sender
 
-    def remove_choice(self):
-        if self.choices_widgets:
-            choice_widget = self.choices_widgets.pop()
-            choice_widget.deleteLater()
+    def remove_choice(self): # Function to remove a choice
+        if self.choices_widgets: # If there are choices
+            choice_widget = self.choices_widgets.pop() # Remove the last choice widget from the list
+            choice_widget.deleteLater() # Delete the choice widget
 
-class ChoiceWidget(QWidget):
-    def __init__(self):
-        super().__init__()
-        layout = QHBoxLayout()
+class ChoiceWidget(QWidget): # Widget to store a choice
+    def __init__(self): # Constructor
+        super().__init__() # Call the parent constructor
+        layout = QHBoxLayout() # Create a layout
 
-        self.text_edit = QLineEdit()
-        layout.addWidget(QLabel("Choice Text:"))
-        self.text_edit.setStyleSheet("color: black;")
-        layout.addWidget(self.text_edit)
+        self.text_edit = QLineEdit() # Create a text edit
+        layout.addWidget(QLabel("Choice Text:")) # Add a label for the text edit
+        self.text_edit.setStyleSheet("color: black;") # Set the text color to black
+        layout.addWidget(self.text_edit) # Add the text edit to the layout
 
-        self.next_chapter_id_edit = QLineEdit()
-        layout.addWidget(QLabel("Next Chapter ID:"))
-        self.next_chapter_id_edit.setStyleSheet("color: black;")
-        layout.addWidget(self.next_chapter_id_edit)
+        self.next_chapter_id_edit = QLineEdit() # Create a next chapter ID edit
+        layout.addWidget(QLabel("Next Chapter ID:")) # Add a label for the next chapter ID edit
+        self.next_chapter_id_edit.setStyleSheet("color: black;") # Set the text color to black
+        layout.addWidget(self.next_chapter_id_edit) # Add the next chapter ID edit to the layout
 
-        self.setLayout(layout)
+        self.setLayout(layout) # Set the layout
