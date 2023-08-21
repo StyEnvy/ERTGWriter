@@ -35,6 +35,7 @@ class DocumentationView(QMainWindow):
         toc_list.addItem("Getting Started")
         toc_list.addItem("Chapter Creation")
         toc_list.addItem("Stages")
+        toc_list.addItem("Character Attributes")
 
         toc_dock = CustomDockWidget("Table of Contents", self) # Create a custom dock widget
         toc_dock.setWidget(toc_list) # Set the list widget as the dock widget

@@ -1,0 +1,53 @@
+{
+    "title": "Character Attributes",
+    "sections": [
+        {
+            "title": "Overview",
+            "content": "The Character class represents a player character in the game, encompassing various attributes that define the character's identity, status, class, race, and more. Each attribute is explained in detail below."
+        },
+        {
+            "title": "name",
+            "content": "A string representing the character's name as chosen by the player."
+        },
+        {
+            "title": "gender",
+            "content": "A string representing the character's gender, such as 'Male' or 'Female'."
+        },
+        {
+            "title": "elements",
+            "content": "A list of strings representing the character's elements or elemental affinities, such as ['Fire', 'Water']."
+        },
+        {
+            "title": "base_class",
+            "content": "A string representing the character's basic class, such as 'Warrior' or 'Mage'."
+        },
+        {
+            "title": "advanced_class",
+            "content": "A string representing the character's advanced or specialized class, if applicable."
+        },
+        {
+            "title": "race",
+            "content": "A string representing the character's race, such as 'Human', 'Elf', or 'Dwarf'."
+        },
+        {
+            "title": "alignment",
+            "content": "A string representing the character's alignment, such as 'Good', 'Neutral', or 'Evil'."
+        },
+        {
+            "title": "nobility_rank",
+            "content": "A string representing the character's nobility rank, if applicable, such as 'Duke' or 'Baroness'."
+        },
+        {
+            "title": "title",
+            "content": "A string representing any special title the character may have earned or been bestowed with."
+        },
+        {
+            "title": "achievements",
+            "content": "A list of strings representing the character's achievements within the game."
+        },
+        {
+            "title": "racial_ability",
+            "content": "A string representing a special ability or trait that is unique to the character's race."
+        }
+    ]
+}
