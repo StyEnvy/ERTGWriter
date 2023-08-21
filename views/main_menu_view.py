@@ -54,9 +54,16 @@ class MainMenuView(QMainWindow):
         main_layout.addWidget(copyright_label) # Add the label to the main layout
 
         # Set the main layout
-        central_widget = QWidget() # Create a central widget
-        central_widget.setLayout(main_layout) # Set the main layout for the central widget
-        self.setCentralWidget(central_widget) # Set the central widget for the main window
-        self.setWindowTitle("ERTG Writer") # Set the window title
+        central_widget = QWidget()
+        central_widget.setLayout(main_layout)
+        self.setCentralWidget(central_widget)
+        self.setWindowTitle("ERTG Writer")
 
-        self.show() # Show the main window
+        self._apply_styles()  # Apply the styles
+        self.show()
+
+    def _apply_styles(self):
+        # Style for buttons
+        button_style = "padding: 10px; font-size: 16px; color: black;"
+        self.new_chapter_button.setStyleSheet(button_style)
+        self.load_chapter_button.setStyleSheet(button_style)
