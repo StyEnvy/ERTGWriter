@@ -23,7 +23,7 @@ if errorlevel 1 (
 )
 
 REM Define your required packages
-set packages=PyQt5 PyQt5-tools logging
+set packages=pip PyQt5 PyQt5-tools logging
 
 REM Loop over the packages and check if they are installed
 for %%p in (%packages%) do (
