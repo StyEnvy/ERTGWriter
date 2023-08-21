@@ -20,6 +20,6 @@ class AboutDialog(QMessageBox):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle('About ERTGWriter')
-        self.setText('ERTGWriter - A tool for creating and editing chapters for text-based RPGs.\n\nVersion: 1.0\nDeveloped by: YourName')
+        self.setText('ERTGWriter - A tool for creating and editing chapters for Erainor RPG.\n\nVersion: 1.0\nDeveloped by: Josh with Envy Games')
         self.setStandardButtons(QMessageBox.Ok)
         self.setStyleSheet("color: black;")
