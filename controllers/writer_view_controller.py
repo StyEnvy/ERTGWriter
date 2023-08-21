@@ -3,7 +3,7 @@ from views.about_dialog import AboutDialog
 from views.documentation_view import DocumentationView
 from controllers.documentation_view_controller import DocumentationViewController
 from views.stage_editor_panel import StageEditorPanel
-from PyQt5.QtWidgets import QFrame
+from PyQt5.QtWidgets import QFrame, QMessageBox, QFileDialog
 import json
 
 class WriterViewController:
@@ -14,12 +14,45 @@ class WriterViewController:
             self.parse_and_load_chapter(file_path)
 
     def new_chapter(self):
-        # Logic for creating a new chapter
-        pass
+        # Create a QMessageBox instance for the confirmation dialog
+        confirmation_dialog = QMessageBox(self.view)
+        confirmation_dialog.setWindowTitle('New Chapter')
+        confirmation_dialog.setText('Are you sure you want to start a new chapter? Unsaved changes will be lost.')
+        confirmation_dialog.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+    
+        # Set the text color to black
+        confirmation_dialog.setStyleSheet("color: black;")
+    
+        # Show the dialog and get the user's response
+        confirmation = confirmation_dialog.exec_()
+    
+        if confirmation == QMessageBox.Yes:
+            # Clear existing stages
+            while self.view.stage_editor_container.count() > 0:
+                item = self.view.stage_editor_container.takeAt(0)
+                widget = item.widget()
+                if widget is not None:
+                    widget.deleteLater()
+
+            # Clear chapter ID field
+            self.view.chapter_info_panel.chapter_id_edit.clear()
+
+            # Set current chapter to None
+            self.current_chapter = None
+            print("New chapter started")  # Debug print
 
     def open_chapter(self):
-        # Logic for opening an existing chapter
-        pass
+        options = QFileDialog.Options()
+        file_path, _ = QFileDialog.getOpenFileName(self.view, "Open Chapter", "", "Chapter Files (*.json);;All Files (*)", options=options)
+        if file_path:
+            # Clear existing stages before loading the new chapter
+            for _ in range(self.view.stage_editor_container.count()):
+                widget = self.view.stage_editor_container.itemAt(0).widget()
+                if widget:
+                    widget.deleteLater()
+
+            self.parse_and_load_chapter(file_path)
+            print(f"Chapter loaded from {file_path}")  # Debug print
 
     def save_chapter(self):
         # Logic for saving the current chapter
@@ -51,9 +84,10 @@ class WriterViewController:
         self.view.chapter_info_panel.chapter_id_edit.setText(chapter_id)
 
         # Clear existing stages
-        for _ in range(self.view.stage_editor_container.count()):
-            widget = self.view.stage_editor_container.itemAt(0).widget()
-            if widget:
+        while self.view.stage_editor_container.count() > 0:
+            item = self.view.stage_editor_container.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
                 widget.deleteLater()
 
         # Add loaded stages to StageEditorContainer
@@ -105,11 +139,10 @@ class WriterViewController:
             next_stage_id = properties.get('next_stage_id')
             if stage_type == 'linear':
                 stage = LinearStage(stage_id, text, next_stage_id)
-            else:
-                input_key = properties['input_key']
+            else:  # Input stage
+                input_key = properties.get('input_key')  # Get input_key if it exists, otherwise None
                 special_case = properties.get('special_case')
                 special_case_next_chapter_id = properties.get('special_case_next_chapter_id')
-                # Updated code
                 choices_data = properties.get('choices', [])
                 choices = [Choice(choice['text'], choice['next_chapter_id']) for choice in choices_data]
                 stage = InputStage(stage_id, text, input_key, choices, next_stage_id, special_case,
