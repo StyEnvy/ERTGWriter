@@ -3,7 +3,7 @@
     "sections": [
         {
             "title": "Overview",
-            "content": "The Character class represents a player character in the game, encompassing various attributes that define the character's identity, status, class, race, and more. Each attribute is explained in detail below."
+            "content": "The Character class represents a player character in the game, encompassing various attributes that define the character's identity, status, class, race, and more. Each attribute is explained in detail below. In the GUI of this tool, input key is the name of the attribute, and in the game this how a chapter saves the character's attributes to a save file."
         },
         {
             "title": "name",
