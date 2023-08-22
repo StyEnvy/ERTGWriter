@@ -99,7 +99,9 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
                 choices.append(choice_data) # Add the choice to the list
 
             # Construct properties dictionary with required fields
-            properties = {'type': 'input', 'input_key': input_key, 'choices': choices}
+            properties = {'type': 'input', 'input_key': input_key}
+            if choices:
+                properties['choices'] = choices
             if next_stage_id is not None:
                 properties['next_stage_id'] = next_stage_id
             if special_case:
@@ -110,5 +112,6 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
             stage_data = {'id': stage_id, 'text': stage_text, 'properties': properties} # Create the stage data
 
         return stage_data # Return the stage data
+
 
 
