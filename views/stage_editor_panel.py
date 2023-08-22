@@ -104,7 +104,7 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
                 properties['choices'] = choices
             if next_stage_id is not None:
                 properties['next_stage_id'] = next_stage_id
-            if special_case:
+            if special_case is not None:
                 properties['special_case'] = special_case
             if special_case_next_chapter_id is not None:
                 properties['special_case_next_chapter_id'] = special_case_next_chapter_id
