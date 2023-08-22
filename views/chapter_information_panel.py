@@ -7,7 +7,7 @@ class ChapterInformationPanel(QWidget): # Class to represent a chapter informati
 
         self.chapter_id_label = QLabel("Chapter ID:") # Create a chapter ID label
         self.chapter_id_edit = QLineEdit() # Create a chapter ID field
-        self.chapter_id_edit.setStyleSheet("color: black;") # Set the text color to black
+        self.chapter_id_edit.setStyleSheet("font-size: 20px; color: black;") # Set the text color to black
         self.chapter_id_edit.setFixedWidth(100) # Set a fixed width for the chapter ID input
 
         layout.addWidget(self.chapter_id_label) # Add the chapter ID label to the horizontal layout

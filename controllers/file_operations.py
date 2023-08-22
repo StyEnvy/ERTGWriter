@@ -10,8 +10,9 @@ class FileOperations:
         stages = [] # stages is a list of stages in the chapter
         for index in range(0, stage_editor_container.count(), 2):  # Step by 2 to skip separators
             stage_editor_panel = stage_editor_container.itemAt(index).widget() # Get the stage editor panel
-            stage = stage_editor_panel.build_stage() # Build the stage
-            stages.append(stage) # Add the stage to the list
+            stage_data = stage_editor_panel.build_stage() # Build the stage data
+            stages.append(stage_data) # Add the stage to the list
+
         chapter_data = {'stages': stages} # Create the chapter data
         with open(file_path, 'w') as file: # Open the file
             json.dump(chapter_data, file, indent=4) # Dump the JSON data to the file
@@ -31,7 +32,7 @@ class FileOperations:
                 special_case = properties.get('special_case') # Get special_case if it exists, otherwise None
                 special_case_next_chapter_id = properties.get('special_case_next_chapter_id') # Get special_case_next_chapter_id if it exists, otherwise None
                 choices_data = properties.get('choices', []) # Get choices_data if it exists, otherwise []
-                choices = [Choice(choice['text'], choice['next_chapter_id']) for choice in choices_data] # Get choices if it exists, otherwise []
+                choices = [Choice(choice['text'], choice.get('next_chapter_id'), choice.get('next_stage_id')) for choice in choices_data] # Get choices if it exists, otherwise []
                 stage = InputStage(stage_id, text, input_key, choices, next_stage_id, special_case, # special_case_next_chapter_id is None if the special case is not met
                                    special_case_next_chapter_id) # special_case_next_chapter_id is the ID of the chapter to go to if the special case is met
 

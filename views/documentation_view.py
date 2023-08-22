@@ -13,7 +13,7 @@ class CustomDockWidget(QDockWidget): # This class inherits from QDockWidget
 
         title_label = QLabel(self.windowTitle()) # Create a title label
         close_button = QPushButton("X") # Create a close button
-        close_button.setStyleSheet("color: white; background: #333;") # Set the button text and background color
+        close_button.setStyleSheet("font-size: 16px; color: white; background: #333;") # Set the button text and background color
 
         close_button.clicked.connect(self.close) # Connect the close button to the close method
 
@@ -31,6 +31,7 @@ class DocumentationView(QMainWindow):
 
         # Table of Contents
         toc_list = QListWidget() # Make it an instance variable
+        toc_list.setStyleSheet("font-size: 16px;")
         toc_list.addItem("Introduction") # Add items to the list
         toc_list.addItem("Getting Started")
         toc_list.addItem("Chapter Creation")

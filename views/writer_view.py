@@ -28,7 +28,7 @@ class WriterView(QMainWindow):
 
         # Menu Bar
         menu_bar = self.menuBar() # Create a menu bar
-        menu_bar.setStyleSheet("background-color: #353535; color: white;") # Set the menu bar style sheet
+        menu_bar.setStyleSheet("font-size: 16px; background-color: #353535; color: white;") # Set the menu bar style sheet
 
         # File Menu
         file_menu = menu_bar.addMenu('File') # Create a file menu
@@ -39,15 +39,28 @@ class WriterView(QMainWindow):
         # Help Menu
         help_menu = menu_bar.addMenu('Help') # Create a help menu
         help_menu.addAction('About', self.controller.about)  # Add an about action to the help menu
-        help_menu.addAction('Documentation', self.controller.documentation)  # Add a documentation action to the help menu
 
     def create_main_layout(self, new_chapter): # Function to create the main layout
         # Main Layout (Vertical)
         main_layout = QVBoxLayout() # Create a main layout
 
-        # Chapter Information Panel (Top)
+        # Top Layout (Horizontal)
+        top_layout = QHBoxLayout()
+
+        # Chapter Information Panel (Top Left)
         self.chapter_info_panel = ChapterInformationPanel() # Create a chapter information panel
-        main_layout.addWidget(self.chapter_info_panel) # Add the chapter information panel to the main layout
+        top_layout.addWidget(self.chapter_info_panel) # Add the chapter information panel to the top layout
+
+        top_layout.addStretch(1) # Add a stretch to push the button to the right
+
+        # Documentation Button (Top Right)
+        documentation_button = QPushButton("Documentation")
+        documentation_button.setStyleSheet("font-size: 16px;") # Set the font size
+        documentation_button.setFixedWidth(120) # Set a fixed width
+        documentation_button.clicked.connect(self.controller.documentation) # Connect the button to the documentation function
+        top_layout.addWidget(documentation_button)
+
+        main_layout.addLayout(top_layout) # Add the top layout to the main layout
 
         # Stage Editor Container (Middle) inside a Scroll Area
         self.stage_editor_container = QVBoxLayout() # Create a stage editor container
@@ -65,8 +78,10 @@ class WriterView(QMainWindow):
         # Add/Remove Stage Buttons
         stage_buttons_layout = QHBoxLayout() # Create a stage buttons layout
         add_stage_button = QPushButton("Add Stage") # Create an add stage button
+        add_stage_button.setStyleSheet("font-size: 16px;") # Set the font size
         add_stage_button.clicked.connect(self.add_stage) # Connect the add stage button to the add stage function
         remove_stage_button = QPushButton("Remove Stage") # Create a remove stage button
+        remove_stage_button.setStyleSheet("font-size: 16px;") # Set the font size
         remove_stage_button.clicked.connect(self.remove_stage) # Connect the remove stage button to the remove stage function
         stage_buttons_layout.addWidget(add_stage_button) # Add the stage buttons to the stage buttons layout
         stage_buttons_layout.addWidget(remove_stage_button) # Add the stage buttons to the stage buttons layout
