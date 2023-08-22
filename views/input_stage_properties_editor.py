@@ -60,11 +60,12 @@ class InputStagePropertiesEditor(QWidget):
 
         self.setLayout(layout)
 
-    def add_choice(self, choice_text: str = "", next_chapter_id: int = None): # Function to add a choice
+    def add_choice(self, choice_text: str = "", next_chapter_id: int = None, next_stage_id: int = None): # Function to add a choice
         if len(self.choices_widgets) < 6: # If there are less than 6 choices
             choice_widget = ChoiceWidget() # Create a choice widget
             choice_widget.text_edit.setText(choice_text) # Set the choice text
             choice_widget.next_chapter_id_edit.setText(str(next_chapter_id) if next_chapter_id is not None else "") # Set the next chapter ID
+            choice_widget.next_stage_id_edit.setText(str(next_stage_id) if next_stage_id is not None else "") # Set the next stage ID
             self.choices_widgets.append(choice_widget) # Add the choice widget to the list
             self.layout().insertWidget(len(self.choices_widgets), choice_widget) # Add the choice widget to the layout
             if len(self.choices_widgets) == 6: # If there are 6 choices
@@ -90,5 +91,10 @@ class ChoiceWidget(QWidget): # Widget to store a choice
         layout.addWidget(QLabel("Next Chapter ID:")) # Add a label for the next chapter ID edit
         self.next_chapter_id_edit.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
         layout.addWidget(self.next_chapter_id_edit) # Add the next chapter ID edit to the layout
+
+        self.next_stage_id_edit = QLineEdit() # Create a next stage ID edit
+        layout.addWidget(QLabel("Next Stage ID:")) # Add a label for the next stage ID edit
+        self.next_stage_id_edit.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
+        layout.addWidget(self.next_stage_id_edit) # Add the next stage ID edit to the layout
 
         self.setLayout(layout) # Set the layout
