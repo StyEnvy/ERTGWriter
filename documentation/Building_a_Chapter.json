@@ -10,6 +10,10 @@
             "content": "Stages are the building blocks of your chapter. Here's how to create them:<br><br><ol><li>Add or Remove Stages: Click \"Add Stage\" to include a new stage or \"Remove Stage\" to delete the last added stage.</li><li>Assign a Stage ID: Enter a numerical ID for the stage you're creating. This is required.</li><li>Select a Stage Type: Use the dropdown to choose between Linear and Input stages.</li></ol>"
         },
         {
+            "title": "Making a Line Break When Writing Stage Text",
+            "content": "To create a line break in the stage text, use the HTML tag 'backslash n' (without the space inbetween and an actual backslash)."
+        },
+        {
             "title": "Types of Stages",
             "content": "There are two main kinds:<br>- **Linear Stages**: Simple stages that guide the player from one stage to the next.<br>- **Input Stages**: Stages that present the player with choices, leading to different paths."
         },
