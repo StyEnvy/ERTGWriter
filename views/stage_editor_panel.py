@@ -12,9 +12,10 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
         # Stage ID Label and Field (Horizontal Layout)
         stage_id_layout = QHBoxLayout() # Create a horizontal layout
         stage_id_label = QLabel("Stage ID:") # Create a stage ID label
+        stage_id_label.setStyleSheet("font-size: 16px;") # Set the font size
         self.stage_id_edit = QLineEdit() # Create a stage ID field
         self.stage_id_edit.setFixedWidth(100) # Set a fixed width
-        self.stage_id_edit.setStyleSheet("color: black;") # Set the text color to black
+        self.stage_id_edit.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
         stage_id_layout.addWidget(stage_id_label) # Add the stage ID label to the horizontal layout
         stage_id_layout.addWidget(self.stage_id_edit) # Add the stage ID field to the horizontal layout
         layout.addLayout(stage_id_layout) # Add the horizontal layout to the main layout
@@ -22,16 +23,19 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
         # Stage Type Selector
         self.stage_type_selector = QComboBox() # Create a stage type selector
         self.stage_type_selector.addItem("Linear") # Add the linear stage type
+        self.stage_type_selector.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
         self.stage_type_selector.addItem("Input") # Add the input stage type
-        self.stage_type_selector.setStyleSheet("color: black;") # Set the text color to black
+        self.stage_type_selector.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
         layout.addWidget(self.stage_type_selector) # Add the stage type selector to the main layout
 
         # Label for stage text
         stage_text_label = QLabel("Write the stage text:") # Create a label for the stage text
+        stage_text_label.setStyleSheet("font-size: 16px;") # Set the font size
         layout.addWidget(stage_text_label) # Add the label to the main layout
 
         # Stage Text Editor
         self.stage_text_editor = QTextEdit() # Create a stage text editor
+        self.stage_text_editor.setStyleSheet("font-size: 16px;")
         layout.addWidget(self.stage_text_editor) # Add the stage text editor to the main layout
 
         # Properties Editor
