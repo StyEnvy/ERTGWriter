@@ -11,20 +11,21 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
 
         # Stage ID Label and Field (Horizontal Layout)
         stage_id_layout = QHBoxLayout() # Create a horizontal layout
-        stage_id_label = QLabel("Stage ID:") # Create a stage ID label
+        stage_id_label = QLabel("Stage ID (Required field):") # Create a stage ID label
         stage_id_label.setStyleSheet("font-size: 16px;") # Set the font size
         self.stage_id_edit = QLineEdit() # Create a stage ID field
         self.stage_id_edit.setFixedWidth(100) # Set a fixed width
         self.stage_id_edit.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
         stage_id_layout.addWidget(stage_id_label) # Add the stage ID label to the horizontal layout
         stage_id_layout.addWidget(self.stage_id_edit) # Add the stage ID field to the horizontal layout
+        stage_id_layout.addStretch(1) # Add a stretch to the horizontal layout to push other widgets to the left
         layout.addLayout(stage_id_layout) # Add the horizontal layout to the main layout
 
         # Stage Type Selector
         self.stage_type_selector = QComboBox() # Create a stage type selector
-        self.stage_type_selector.addItem("Linear") # Add the linear stage type
+        self.stage_type_selector.addItem("Linear Stage") # Add the linear stage type
         self.stage_type_selector.setStyleSheet("font-size: 16px; color: black; background-color: white;") # Set the text color to black
-        self.stage_type_selector.addItem("Input") # Add the input stage type
+        self.stage_type_selector.addItem("Input Stage") # Add the input stage type
         self.stage_type_selector.setStyleSheet("font-size: 16px; color: black; background-color: white;") # Set the text color to black
         layout.addWidget(self.stage_type_selector) # Add the stage type selector to the main layout
 
