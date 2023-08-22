@@ -23,3 +23,4 @@ class AboutDialog(QMessageBox):
         self.setText('ERTGWriter - A tool for creating and editing chapters for Erainor RPG.\n\nVersion: 1.0\nDeveloped by: Josh with Envy Games')
         self.setStandardButtons(QMessageBox.Ok)
         self.setStyleSheet("font-size: 16px; color: black;")
+

@@ -51,6 +51,14 @@ class WriterViewController:
             print(f"Chapter loaded from {file_path}")  # Debug print
 
     def save_chapter(self): # Function to save the current chapter
+        if not self.file_operations.validate_stages(self.view.stage_editor_container):
+            warning_dialog = QMessageBox(self.view)
+            warning_dialog.setWindowTitle("Missing Stage ID")
+            warning_dialog.setText("All stages must have an ID. Please fill out the stage IDs before saving.")
+            warning_dialog.setIcon(QMessageBox.Warning)
+            warning_dialog.setStyleSheet("font-size: 16px; color: black;")
+            warning_dialog.exec_()
+            return
         # Check if the current chapter has been saved before
         if self.current_file_path: 
             self.save_to_file(self.current_file_path) # Save the chapter to the current file path
@@ -58,6 +66,14 @@ class WriterViewController:
             self.save_chapter_as() # Save the chapter as a new file
 
     def save_chapter_as(self): # Function to save the current chapter as a new file
+        if not self.file_operations.validate_stages(self.view.stage_editor_container):
+            warning_dialog = QMessageBox(self.view)
+            warning_dialog.setWindowTitle("Missing Stage ID")
+            warning_dialog.setText("All stages must have an ID. Please fill out the stage IDs before saving.")
+            warning_dialog.setIcon(QMessageBox.Warning)
+            warning_dialog.setStyleSheet("font-size: 16px; color: black;")
+            warning_dialog.exec_()
+            return
         chapter_id = self.view.chapter_info_panel.chapter_id_edit.text().strip() # Get the chapter ID
         if chapter_id.isdigit(): # If the chapter ID is a number
             default_name = f"chapter_{chapter_id}.json" # Set the default file name

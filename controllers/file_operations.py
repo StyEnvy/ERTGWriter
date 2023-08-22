@@ -38,3 +38,11 @@ class FileOperations:
 
             stages.append(stage) # special_case_next_chapter_id is None if the special case is not met
         return Chapter(stages) # special_case_next_chapter_id is the ID of the chapter to go to if the special case is met
+    
+    def validate_stages(self, stage_editor_container):
+        for index in range(0, stage_editor_container.count(), 2):  # Step by 2 to skip separators
+            stage_editor_panel = stage_editor_container.itemAt(index).widget()  # Get the stage editor panel
+            stage_id = stage_editor_panel.stage_id_edit.text().strip()  # Get the stage ID as a string
+            if not stage_id or not stage_id.isdigit():
+                return False
+        return True
