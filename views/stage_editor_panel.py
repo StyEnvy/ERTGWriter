@@ -23,9 +23,9 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
         # Stage Type Selector
         self.stage_type_selector = QComboBox() # Create a stage type selector
         self.stage_type_selector.addItem("Linear") # Add the linear stage type
-        self.stage_type_selector.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
+        self.stage_type_selector.setStyleSheet("font-size: 16px; color: black; background-color: white;") # Set the text color to black
         self.stage_type_selector.addItem("Input") # Add the input stage type
-        self.stage_type_selector.setStyleSheet("font-size: 16px; color: black;") # Set the text color to black
+        self.stage_type_selector.setStyleSheet("font-size: 16px; color: black; background-color: white;") # Set the text color to black
         layout.addWidget(self.stage_type_selector) # Add the stage type selector to the main layout
 
         # Label for stage text
