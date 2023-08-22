@@ -60,7 +60,9 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
         if stage_type_index == 0: # Linear stage
             next_stage_id_text = self.linear_properties_editor.next_stage_id_edit.text().strip() # Get the next stage ID
             next_stage_id = int(next_stage_id_text) if next_stage_id_text.isdigit() else None # Convert the next stage ID to an integer if it is a number, otherwise None
-            properties = {'type': 'linear', 'next_stage_id': next_stage_id} # Create the stage data with the next stage ID
+            properties = {'type': 'linear'}
+            if next_stage_id is not None:
+                properties['next_stage_id'] = next_stage_id
             stage_data = {'id': stage_id, 'text': stage_text, 'properties': properties} # Create the stage data
 
         # Input Stage
@@ -88,22 +90,25 @@ class StageEditorPanel(QWidget): # Class to represent a stage editor panel
                 next_chapter_id_text = choice_widget.next_chapter_id_edit.text().strip() # Get the next chapter ID
                 next_chapter_id = int(next_chapter_id_text) if next_chapter_id_text.isdigit() else None # Convert the next chapter ID to an integer if it is a number, otherwise None
 
-                choice_data = {'text': choice_text, 'next_stage_id': next_choice_stage_id} # Create choice data with the text and next stage ID
+                choice_data = {'text': choice_text}
+                if next_choice_stage_id is not None:
+                    choice_data['next_stage_id'] = next_choice_stage_id
                 if next_chapter_id is not None:
-                    choice_data['next_chapter_id'] = next_chapter_id # Add next chapter ID if provided
+                    choice_data['next_chapter_id'] = next_chapter_id
 
                 choices.append(choice_data) # Add the choice to the list
 
             # Construct properties dictionary with required fields
-            properties = {'type': 'input', 'input_key': input_key, 'choices': choices} # Create a properties dictionary with the required fields
-            if next_stage_id is not None: # If the next stage ID is not None
-                properties['next_stage_id'] = next_stage_id # Add the next stage ID to the properties dictionary
-            if special_case: # If the special case is not empty
-                properties['special_case'] = special_case # Add the special case to the properties dictionary
-            if special_case_next_chapter_id is not None: # If the special case next chapter ID is not None
-                properties['special_case_next_chapter_id'] = special_case_next_chapter_id # Add the special case next chapter ID to the properties dictionary
+            properties = {'type': 'input', 'input_key': input_key, 'choices': choices}
+            if next_stage_id is not None:
+                properties['next_stage_id'] = next_stage_id
+            if special_case:
+                properties['special_case'] = special_case
+            if special_case_next_chapter_id is not None:
+                properties['special_case_next_chapter_id'] = special_case_next_chapter_id
 
             stage_data = {'id': stage_id, 'text': stage_text, 'properties': properties} # Create the stage data
 
         return stage_data # Return the stage data
+
 
