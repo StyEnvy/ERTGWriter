@@ -1,0 +1,29 @@
+{
+    "title": "Building a Chapter",
+    "sections": [
+        {
+            "title": "Chapter Structure",
+            "content": "When creating a chapter, you must assign a numerical ID by entering a digit into the \"Chapter ID\" field. Chapters are saved as 'chapter_#.json' files and identified by this number."
+        },
+        {
+            "title": "Building Stages",
+            "content": "Stages are the building blocks of your chapter. Here's how to create them:<br><br><ol><li>Add or Remove Stages: Click \"Add Stage\" to include a new stage or \"Remove Stage\" to delete the last added stage.</li><li>Assign a Stage ID: Enter a numerical ID for the stage you're creating. This is required.</li><li>Select a Stage Type: Use the dropdown to choose between Linear and Input stages.</li></ol>"
+        },
+        {
+            "title": "Types of Stages",
+            "content": "There are two main kinds:<br>- **Linear Stages**: Simple stages that guide the player from one stage to the next.<br>- **Input Stages**: Stages that present the player with choices, leading to different paths."
+        },
+        {
+            "title": "Making a Linear Stage",
+            "content": "1. Enter a numerical stage ID.<br>2. Write the stage text in the \"Write the stage text\" field.<br>3. Specify the next stage by entering its numerical ID into \"Next Stage ID.\""
+        },
+        {
+            "title": "Making an Input Stage",
+            "content": "Input stages can be created in two different ways, each serving a unique purpose:<br><br>1. **Basic Input Stage**: This type doesn't include choices but uses optional fields. Here's how to create it:<br>- Enter the Stage ID and Stage Text as usual.<br>- Fill in the optional fields as needed: Input Key (Optional), Next Stage ID (Optional), Special Case (Optional), Special Case Next Chapter ID (Optional).<br><pre>{\n    \"id\": 8,\n    \"text\": \"By what name shall you be known?\",\n    \"properties\": {\n        \"type\": \"input\",\n        \"input_key\": \"name\",\n        \"next_stage_id\": 9,\n        \"special_case\": \"Corrumpere\",\n        \"special_case_next_chapter_id\": 10\n    }\n}</pre><br>2. **Choice-Based Input Stage**: This type uses the choice widget instead of the optional fields (except for Input Key when needed). Here's how to create it:<br>- Click the \"Add\" or \"Remove\" choices buttons to manage the choices.<br>- Fill in the required fields for each choice: Choice Text (the exact answer you expect from the player), Next Chapter ID or Next Stage ID (but not both in the same choice). You can add up to 6 choices and mix Next Chapter and Next Stage as desired, but at least one field must be filled.<br><pre>{\n    \"id\": 9,\n    \"text\": \"Shall you be recognized as Male or Female?\",\n    \"properties\": {\n        \"type\": \"input\",\n        \"input_key\": \"gender\",\n        \"choices\": [\n            {\"text\": \"Male\", \"next_chapter_id\": 2},\n            {\"text\": \"Female\", \"next_chapter_id\": 2}\n        ]\n    }\n}</pre>"
+        },
+        {
+            "title": "Using the Optional Input Key Field",
+            "content": "Utilize this field when saving the answer as part of the character's attributes, such as items listed in the Character Attributes documentation."
+        }
+    ]
+}

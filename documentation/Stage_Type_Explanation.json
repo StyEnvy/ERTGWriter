@@ -1,25 +1,17 @@
 {
-    "title": "Stages",
+    "title": "Stage Type Explanation",
     "sections": [
         {
             "title": "Introduction to Stages",
-            "content": "Stages are the fundamental building blocks of a chapter in Erainor RPG. A chapter consists of a sequence of stages, each containing text, properties, and possible player choices. This guide provides a deep dive into creating and managing stages using the ERTG Writer GUI."
+            "content": "Stages are the fundamental building blocks of a chapter in Erainor RPG. A chapter consists of a sequence of stages, each containing text, properties, and possible player choices."
         },
         {
             "title": "Types of Stages",
             "content": "There are mainly two types of stages: <strong>Linear</strong> and <strong>Input</strong>.<br><br>1. <strong>Linear Stages:</strong> These are straightforward and lead the player from one stage to the next.<br>2. <strong>Input Stages:</strong> These stages provide the player with input choices and may lead to different paths based on the selected choice."
         },
         {
-            "title": "Creating and Editing a Stage",
-            "content": "To create or edit a stage, you can use the ERTG Writer GUI's writer view. Here's how:<br><br><ol><li>Select 'New Chapter' or 'Open Chapter' from the main menu.</li><li>Use the Stage Editor Panel to create and edit stages.</li><li>Choose the stage type, enter the text, and set the properties accordingly.</li><li>Save the chapter using 'Save Chapter' under the 'File' menu.</li></ol>"
-        },
-        {
             "title": "Examples of Stages",
             "content": "Here are examples of stages from Chapter 1:<br><br><strong>Input Stage (Stage 8):</strong><br><pre>{\n    \"id\": 8,\n    \"text\": \"Embark on your journey with wisdom, adventurer...\",\n    \"properties\": {\n        \"type\": \"input\",\n        \"next_stage_id\": 9,\n        \"input_key\": \"name\",\n        \"special_case\": \"Corrumpere\",\n        \"special_case_next_chapter_id\": 10\n    }\n}</pre><br><strong>Input Stage with Choices (Stage 9):</strong><br><pre>{\n    \"id\": 9,\n    \"text\": \"A name, a powerful symbol of one's identity...\",\n    \"properties\": {\n        \"type\": \"input\",\n        \"next_stage_id\": null,\n        \"input_key\": \"gender\",\n        \"special_case\": \"None\",\n        \"special_case_next_chapter_id\": null,\n        \"choices\": [\n            {\n                \"text\": \"Male\",\n                \"next_chapter_id\": 2\n            },\n            {\n                \"text\": \"Female\",\n                \"next_chapter_id\": 2\n            }\n        ]\n    }\n}</pre>"
-        },
-        {
-            "title": "Special Cases and Choices",
-            "content": "Some stages may have special cases and choices that lead to different outcomes. These can be defined in the properties section of the stage. Here's how they work:<br><br><strong>Special Case:</strong> A special case triggers a specific action if a certain condition is met. For example, in stage 8, if the input name is 'Corrumpere', it leads to a different chapter.<br><br><strong>Choices:</strong> Choices allow the player to select different paths. In stage 9, the player can choose between 'Male' and 'Female', leading to different chapters based on the choice."
         }
     ]
 }

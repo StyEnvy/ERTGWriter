@@ -1,0 +1,25 @@
+{
+    "title": "Saving a Chapter",
+    "sections": [
+        {
+            "title": "File Operations",
+            "content": "The process of saving a chapter involves several key steps, which are explained below:<br><br><ul><li><strong>Loading a Chapter:</strong> The system can read a chapter from an existing file, recognizing its structure and content.</li><li><strong>Saving the Chapter:</strong> The chapter data is collected, organized, and written into a file in a specific format. This includes both linear and input stages.</li><li><strong>Parsing the Chapter:</strong> The saved data can be translated back into the application's internal structure, allowing it to be manipulated and used within the game.</li></ul>"
+        },
+        {
+            "title": "Saving Functions",
+            "content": "<strong>Save Chapter:</strong> If the chapter has been saved before, it will be saved again to the same location. If not, the \"Save Chapter As\" function is called.<br><br><strong>Save Chapter As:</strong> You can save the current chapter as a new file. If the Chapter ID is a number, you'll be prompted to choose a file name and location. If not, you'll receive an error message."
+        },
+        {
+            "title": "JSON File Structure",
+            "content": "After saving, the chapter's file should look like this:<br><br><strong>Linear Stages:</strong> These are straightforward and contain an ID, text, and next stage ID. For example:<br><pre>{\n    \"id\": 1,\n    \"text\": \"Greetings, wanderer...\",\n    \"properties\": {\n        \"type\": \"linear\",\n        \"next_stage_id\": 2\n    }\n}</pre><strong>Input Stages (Type 1):</strong> These include an ID, text, input key (optional), next stage ID (optional), special case (optional), and special case next chapter ID (optional). For example:<br><pre>{\n    \"id\": 8,\n    \"text\": \"By what name shall you be known...\",\n    \"properties\": {\n        \"type\": \"input\",\n        \"input_key\": \"name\",\n        \"next_stage_id\": 9,\n        \"special_case\": \"Corrumpere\",\n        \"special_case_next_chapter_id\": 10\n    }\n}</pre><strong>Input Stages (Type 2):</strong> These include choices and may specify a next chapter ID or next stage ID for each choice. For example:<br><pre>{\n    \"id\": 9,\n    \"text\": \"Shall you be recognized as Male or Female...\",\n    \"properties\": {\n        \"type\": \"input\",\n        \"input_key\": \"gender\",\n        \"choices\": [\n            {\"text\": \"Male\", \"next_chapter_id\": 2},\n            {\"text\": \"Female\", \"next_chapter_id\": 2}\n        ]\n    }\n}"
+        },
+        {
+            "title": "Chapter ID and File Naming",
+            "content": "When entering the chapter ID, the program will automatically generate the file name for you, such as 'chapter_1.json' for an ID of 1. The chapter ID field is specifically used to determine the file name, and you don't have to rename the file manually unless you notice an issue with the chapter ID. It streamlines the saving process and ensures consistency in file naming."
+        },
+        {
+            "title": "Quick Check Guide",
+            "content": "To make sure your JSON file looks right, you can quickly check:<br><ul><li>Linear Stages have an ID, text, and next stage ID.</li><li>Input Stages (Type 1) include an optional input key, next stage ID, special case, and special case next chapter ID.</li><li>Input Stages (Type 2) include choices, with text and either a next chapter ID or next stage ID for each choice.</li></ul>This ensures that your chapter is saved correctly and can be properly utilized within the game."
+        }
+    ]
+}

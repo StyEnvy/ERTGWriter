@@ -3,7 +3,7 @@
     "sections": [
         {
             "title": "Overview",
-            "content": "ERTG Writer is designed to simplify the process of creating and managing chapters for Erainor RPG. This guide will introduce you to the main functionalities accessible from the main menu, File menu, and Help menu."
+            "content": "ERTG Writer is designed to simplify the process of creating and managing chapters for Erainor RPG. This guide will introduce you to the main functionalities accessible from the main menu, File menu, and Documentation page."
         },
         {
             "title": "Main Menu",
@@ -11,11 +11,15 @@
         },
         {
             "title": "File Menu",
-            "content": "The File menu offers the following options:<br><ul><li><b>New Chapter:</b> Start a new chapter, discarding any unsaved changes.</li><li><b>Open Chapter:</b> Open an existing chapter file for further editing.</li><li><b>Save Chapter:</b> Save the current chapter. If it's the first time saving a new chapter, this option will behave like 'Save As', allowing you to specify a file name and location. If you're working on an existing chapter, it will simply update the file with any new changes.</li></ul>"
+            "content": "The File menu offers the following options:<br><ul><li><b>New Chapter:</b> Start a new chapter, discarding any unsaved changes.</li><li><b>Open Chapter:</b> Open an existing chapter file for further editing.</li><li><b>Save Chapter:</b> Save the current chapter. If it's the first time saving a new chapter, this option will behave like 'Save As', allowing you to specify a file location. Remember that the tool will automatically fill out the correct name of the file based on the numerical chapter ID you entered. If you're working on an existing chapter, it will simply update the file with any new changes.</li></ul>"
         },
         {
             "title": "Help Menu",
-            "content": "The Help menu consists of the following options:<br><ul><li><b>About:</b> Displays information about the application. Note that this is a GUI-blocking dialog, meaning you must close it to continue interacting with the application.</li><li><b>Documentation:</b> Opens the documentation view. This view uses a dock widget, which allows the Table of Contents to be placed in a separate, dockable panel. You can select topics from the Table of Contents to view their details.</li></ul>"
+            "content": "The Help menu consists of the following options:<br><ul><li><b>About:</b> Displays information about the application.</li></ul>"
+        },
+        {
+            "title": "Documentation Page",
+            "content": "The Documentation button is located in the top right of the writer view. Clicking it opens a dockable window containing the Table of Contents for the application's documentation. It is not GUI-blocking, allowing continued interaction with the application."
         }
     ]
 }
